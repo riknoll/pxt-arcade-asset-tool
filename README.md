@@ -43,6 +43,7 @@ This repo uses [semantic-ui-react](https://github.com/Semantic-Org/Semantic-UI-R
 
 # Structure
 
+```
 ├── src
 │   ├── components
 │   │   ├── **/*.tsx (Your React components)
@@ -65,6 +66,7 @@ This repo uses [semantic-ui-react](https://github.com/Semantic-Org/Semantic-UI-R
 └── .gitignore
 └── LICENSE
 └── README.md
+```
 
 # Deploy
 
