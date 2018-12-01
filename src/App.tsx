@@ -62,7 +62,7 @@ export class App extends React.Component<AppProps, AppState> {
             <div className="App">
                 <Hello />
                 <br />
-                <span>Go back to the editor, to see your new block</span>
+                <span>Go back to the editor, to see your new block under the music category</span>
             </div>
         );
     }
