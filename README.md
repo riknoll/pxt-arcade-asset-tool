@@ -11,7 +11,7 @@ This sample handle's all the custom message passing required to read, write and 
 
 ## Try it out
 
-
+https://samelhusseini.github.io/pxt-editor-extension-sample
 
 ## Build
 
@@ -83,6 +83,10 @@ Unless you extension is an Approved extension, you will need to search for it us
 ## Supported targets
 
 * for PXT/microbit
+* for PXT/adafruit
+* for PXT/arcade
+* for PXT/codal
+
 (The metadata above is needed for package search, update it with the targets you support)
 
 ## License 
