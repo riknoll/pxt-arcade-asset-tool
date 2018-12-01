@@ -1,7 +1,7 @@
 {
-    "name": "animation-editor",
+    "name": "editor-extension-sample",
     "version": "0.0.1",
-    "description": "An animation editor for MakeCode",
+    "description": "A sample editor extension for MakeCode",
     "license": "MIT",
     "dependencies": {
         "core": "*"
@@ -14,8 +14,8 @@
     ],
     "public": true,
     "extension": {
-        "namespace": "basic",
-        "label": "Animation Editor",
+        "namespace": "music",
+        "label": "Sample Editor",
         "localUrl": "http://127.0.0.1:3000/index.html"
     }
 }

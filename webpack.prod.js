@@ -32,9 +32,9 @@ module.exports = {
             inject: false,
             hash: false,
             title: 'pxt-editor-extension-sample',
-            semanticUIPath: '//cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist/',
-            reactPath: 'https://unpkg.com/react@16/',
-            reactDomPath: 'https://unpkg.com/react-dom@16/',
+            semanticUIPath: '//cdn.jsdelivr.net/npm/semantic-ui@2.4.0/dist',
+            reactPath: 'https://unpkg.com/react@16',
+            reactDomPath: 'https://unpkg.com/react-dom@16',
             react: 'production.min',
             template: './src/index.html',
             filename: 'index.html'

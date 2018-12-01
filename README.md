@@ -1,4 +1,4 @@
-# pxt-editor-extension-sample
+# MakeCode editor extension sample
 
 Fork this repo to create your own Microsoft MakeCode editor extension (PXT).
 
@@ -9,11 +9,11 @@ The editor extension is able to show custom UI in that iframe. It's also able to
 
 This sample handle's all the custom message passing required to read, write and request permissions from the MakeCode editor.
 
-# Try it out
+## Try it out
 
 
 
-# Build
+## Build
 
 First, install Node.
 
@@ -23,7 +23,7 @@ To build the repo, run:
 npm install
 ```
 
-# Development
+## Development
 
 After this you can run 
 ```
@@ -41,7 +41,7 @@ Webpack will generate the bundled app js when running ``npm run start`` or ``npm
 
 This repo uses [semantic-ui-react](https://github.com/Semantic-Org/Semantic-UI-React) as the UI framework, but you can substitue it with any
 
-# Structure
+## Structure
 
 ```
 ├── src
@@ -68,7 +68,7 @@ This repo uses [semantic-ui-react](https://github.com/Semantic-Org/Semantic-UI-R
 └── README.md
 ```
 
-# Deploy
+## Deploy
 
 To deploy your extension to Github pages, run:
 
@@ -85,6 +85,6 @@ Unless you extension is an Approved extension, you will need to search for it us
 * for PXT/microbit
 (The metadata above is needed for package search, update it with the targets you support)
 
-# License 
+## License 
 
 MIT
