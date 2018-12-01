@@ -1,0 +1,21 @@
+{
+    "name": "animation-editor",
+    "version": "0.0.1",
+    "description": "An animation editor for MakeCode",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*"
+    },
+    "files": [
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "extension": {
+        "namespace": "basic",
+        "label": "Animation Editor",
+        "localUrl": "http://127.0.0.1:3000/index.html"
+    }
+}

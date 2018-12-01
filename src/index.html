@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.semanticUIPath %>/semantic.min.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="<%= htmlWebpackPlugin.options.reactPath %>/umd/react.<%= htmlWebpackPlugin.options.react %>.js" crossorigin></script>
+    <script src="<%= htmlWebpackPlugin.options.reactDomPath %>/umd/react-dom.<%= htmlWebpackPlugin.options.react %>.js" crossorigin></script>
+
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks.app.entry %>"></script>
+
+</body>
+
+</html>
