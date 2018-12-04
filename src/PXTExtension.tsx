@@ -1,4 +1,4 @@
-/// <reference path="./typings/extension.d.ts" />
+/// <reference path="./localtypings/extension.d.ts" />
 
 import * as React from 'react';
 import { App } from './App';
