@@ -47,12 +47,8 @@ This repo uses [semantic-ui-react](https://github.com/Semantic-Org/Semantic-UI-R
 ├── src
 │   ├── components
 │   │   ├── **/*.tsx (Your React components)
-│   ├── favicon.ico
-│   ├── images
-│   ├── index.html
-│   ├── js
-│   │   ├── **/*.js
-│   └── partials/template
+│   ├── App.tsx (Main app component)
+│   ├── PXTExtension.tsx (Main Extension handler)
 ├── dist
 │   ├── favicon.ico
 │   ├── style.css (Your CSS styles)
