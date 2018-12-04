@@ -47,6 +47,10 @@ This repo uses [semantic-ui-react](https://github.com/Semantic-Org/Semantic-UI-R
 ├── src
 │   ├── components
 │   │   ├── **/*.tsx (Your React components)
+│   ├── exporters
+│   │   ├── *.ts (Your emitters)
+│   ├── localtypings
+│   │   ├── *.d.ts (Your local typings)
 │   ├── App.tsx (Main app component)
 │   ├── PXTExtension.tsx (Main Extension handler)
 ├── dist
