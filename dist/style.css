@@ -25,3 +25,37 @@ body {
 .App .Hello {
     font-size: 2rem;
 }
+
+.project-container {
+    max-width: 900px;
+    min-width: 300px;
+}
+
+.file-info {
+    background: white;
+    border: 2px solid #dedede;
+    border-radius: 0.25em;
+    padding: 0.25em;
+    min-height: 10em;
+    text-align: left;
+}
+
+.pixel-image {
+    object-fit: contain;
+    image-rendering: optimizeSpeed;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: optimize-contrast;
+	image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10px' height='10px'%3E%3Crect x='0' y='0' width='10px' height='10px' fill='white'%3E%3C/rect%3E%3Crect x='0' y='0' width='5px' height='5px' fill='%23dedede'%3E%3C/rect%3E%3Crect x='5' y='5' width='5px' height='5px' fill='%23dedede'%3E%3C/rect%3E%3C/svg%3E");
+}
+
+.export-controls {
+    padding-top: 1em;
+}
+
+.palette-preview {
+    height: 50px;
+    width: 100%;
+}
