@@ -25,6 +25,21 @@ interface ImageFile extends SourceFile {
     parsed: ImageInfo;
 }
 
+interface PiskelFile extends SourceFile {
+    parsed: PiskelInfo;
+}
+
+interface PiskelInfo {
+    height: number;
+    width: number;
+    fps: number;
+
+    description: string;
+    piskelName: string;
+
+    frames: ImageInfo[];
+}
+
 interface ImageInfo {
     width: number;
     height: number;

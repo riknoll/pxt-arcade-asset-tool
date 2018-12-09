@@ -19,7 +19,7 @@ export async function parseImageAsync(encoded: string): Promise<ImageInfo> {
 async function loadImageAsync(encoded: string): Promise<HTMLImageElement> {
     return new Promise<HTMLImageElement>(resolve => {
         const el = document.createElement("img");
-        el.src = "data:image/png;base64," + encoded;
+        el.src = encoded.indexOf("data:") === 0 ? encoded : "data:image/png;base64," + encoded;
         el.onload = () => {
             resolve(el)
         };

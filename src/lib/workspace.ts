@@ -1,6 +1,7 @@
 import * as util from "./util";
 import * as palette from "./palette";
 import * as images from "./images";
+import * as piskel from "./piskel";
 
 export const project: WorkSpace = {
     currentId: 1,
@@ -11,7 +12,7 @@ export const project: WorkSpace = {
 export async function createFileAsync(file: File): Promise<SourceFile> {
     const newFile: SourceFile = {
         id: newID(),
-        extension: file.name.substr(file.name.lastIndexOf(".")),
+        extension: file.name.substr(file.name.lastIndexOf(".")).toLowerCase(),
         name: file.name,
         data: null
     };
@@ -26,6 +27,9 @@ export async function createFileAsync(file: File): Promise<SourceFile> {
     }
     else if (newFile.extension === ".png") {
         (newFile as ImageFile).parsed = await images.parseImageAsync(newFile.data)
+    }
+    else if (newFile.extension === ".piskel") {
+        (newFile as PiskelFile).parsed = await piskel.parsePiskelAsync(newFile.data)
     }
 
     project.files.push(newFile);

@@ -31,7 +31,7 @@ export const defaultPalette: PaletteFile = {
 const supportedTypes = [".gpl", ".txt", ".hex"];
 
 export function isPaletteFile(extension: string) {
-    return supportedTypes.indexOf(extension.toLowerCase()) !== -1;
+    return supportedTypes.indexOf(extension) !== -1;
 }
 
 export function parsePaletteFile(file: SourceFile): PaletteInfo {
