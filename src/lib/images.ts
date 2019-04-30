@@ -50,12 +50,15 @@ export function encodeSpriteSheet(sheet: SpriteSheet): EncodedImage[] {
             const left = c * sheet.spriteWidth;
             const top = r * sheet.spriteHeight;
 
+            let getColor = (x: number, y: number) => {
+                const index = (left + x) + (top + y) * source.width
+                return closestColor(source.pixels, index << 2, colors);
+            }
+
             res.push({
                 identifier: sheet.identifier + "_" + index++,
-                encoded: f4EncodeImg(sheet.spriteWidth, sheet.spriteHeight, 4, (x, y) => {
-                    const index = (left + x) + (top + y) * source.width
-                    return closestColor(source.pixels, index << 2, colors);
-                })
+                encoded: f4EncodeImg(sheet.spriteWidth, sheet.spriteHeight, 4, getColor),
+                img: imgEncodeImg(sheet.spriteWidth, sheet.spriteHeight, getColor)
             });
 
             if (index >= sheet.spriteCount) break;
@@ -69,12 +72,16 @@ export function encodeSpriteSheet(sheet: SpriteSheet): EncodedImage[] {
 export function encodeSprite(sprite: Sprite): EncodedImage {
     const source = sprite.source.parsed;
     const colors = palette.toNumbers(sprite.palette.parsed.colors);
+
+    let getColor = (x: number, y: number) => {
+        const index = x + y * source.width
+        return closestColor(source.pixels, index << 2, colors);
+    }
+
     return {
         identifier: sprite.identifier,
-        encoded: f4EncodeImg(source.width, source.height, 4, (x, y) => {
-            const index = x + y * source.width
-            return closestColor(source.pixels, index << 2, colors);
-        })
+        encoded: f4EncodeImg(source.width, source.height, 4, getColor),
+        img: imgEncodeImg(source.width, source.height, getColor)
     };
 }
 
@@ -133,4 +140,18 @@ export function f4EncodeImg(w: number, h: number, bpp: number, getPix: (x: numbe
     function hex2(n: number) {
         return ("0" + n.toString(16)).slice(-2)
     }
+}
+
+export function imgEncodeImg(w: number, h: number, getPix: (x: number, y: number) => number) {
+    let res = "img`\n    "
+    for (let r = 0; r < h; r++) {
+        let row: number[] = []
+        for (let c = 0; c < w; c++) {
+            row.push(getPix(c, r));
+        }
+        res += row.map(n => n.toString(16)).join(" ");
+        res += "\n    "
+    }
+    res += "`";
+    return res;
 }

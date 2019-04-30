@@ -55,4 +55,5 @@ interface SpriteSheet extends Sprite {
 interface EncodedImage {
     identifier: string;
     encoded: string;
+    img: string;
 }

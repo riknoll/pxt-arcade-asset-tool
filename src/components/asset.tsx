@@ -1,19 +1,29 @@
 import * as React from "react";
 
-import { Grid, Image, Header, Form, Checkbox, Input, Select, CheckboxProps, FormDropdownProps, InputProps } from "semantic-ui-react";
+import { Grid, Image, Header, Form, Checkbox, Input, Select, CheckboxProps, FormDropdownProps, InputProps, Segment, Button } from "semantic-ui-react";
 
 import * as workspace from "../lib/workspace";
 import * as palette from "../lib/palette";
 import * as util from "../lib/util";
+import { encodeSpriteSheet, encodeSprite } from "../lib/images";
 
 interface FileInfoProps {
     file: SourceFile;
 }
 
-export class FileInfo extends React.Component<FileInfoProps, {}> {
+interface FileInfoState {
+    output: string;
+}
+
+export class FileInfo extends React.Component<FileInfoProps, FileInfoState> {
     builder: AssetBuilder;
 
-    setBuilderRef = (ref: AssetBuilder) => this.builder = ref;
+    setBuilderRef = (ref: AssetBuilder) => {
+        this.builder = ref
+        this.onBuilderChange();
+    };
+
+    onBuilderChange = () => this.setState({ output: this.getTextOutput() });
 
     render() {
         let imageSource: string;
@@ -32,14 +42,17 @@ export class FileInfo extends React.Component<FileInfoProps, {}> {
                             <Image className="pixel-image" src={imageSource} fluid centered></Image>
                         </Grid.Column>
                     }
-                    <Grid.Column width="thirteen">
+                    <Grid.Column width="ten">
                         <Grid.Row>
                             <Header size="medium" textAlign="left">{file.name}</Header>
                             { this.hasAsset() ?
-                                <AssetBuilder basename={basename} ref={this.setBuilderRef} info={(file as ImageFile).parsed} /> :
+                                <AssetBuilder basename={basename} ref={this.setBuilderRef} onChange={this.onBuilderChange} info={(file as ImageFile).parsed} /> :
                                 <div className="palette-preview" style={{background: mkGradient((this.props.file as PaletteFile).parsed.colors)}} ></div>
                             }
                         </Grid.Row>
+                    </Grid.Column>
+                    <Grid.Column width="three">
+                            <CodePreview text={this.state && this.state.output} />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
@@ -79,6 +92,19 @@ export class FileInfo extends React.Component<FileInfoProps, {}> {
         }
     }
 
+    getTextOutput() {
+        const asset = this.getAsset();
+        if ((asset as SpriteSheet).spriteCount != undefined) {
+            const encoded = encodeSpriteSheet(asset as SpriteSheet);
+
+            return encoded.map((e, i) => `const ${asset.identifier}_${i} = ${e.img};`).join("\n\n")
+        }
+        else {
+            const encoded = encodeSprite(asset as Sprite);
+            return `const ${asset.identifier} = ${encoded.img};`
+        }
+    }
+
     hasAsset() {
         return !palette.isPaletteFile(this.props.file.extension);
     }
@@ -87,6 +113,7 @@ export class FileInfo extends React.Component<FileInfoProps, {}> {
 interface AssetBuilderProps {
     info: ImageInfo;
     basename: string;
+    onChange: () => void;
 }
 
 interface AssetBuilderState {
@@ -141,7 +168,7 @@ export class AssetBuilder extends React.Component<AssetBuilderProps, AssetBuilde
 
                 let stateTransaction: any = {};
                 stateTransaction[fieldName] = val;
-                this.setState(stateTransaction);
+                this.setState(stateTransaction, this.props.onChange);
             };
         }
         return this.handlers[fieldName];
@@ -152,7 +179,7 @@ export class AssetBuilder extends React.Component<AssetBuilderProps, AssetBuilde
             this.checkboxes[fieldName] = (ev, props) => {
                 let stateTransaction: any = {};
                 stateTransaction[fieldName] = props.checked;
-                this.setState(stateTransaction);
+                this.setState(stateTransaction, this.props.onChange);
             };
         }
         return this.checkboxes[fieldName];
@@ -163,7 +190,7 @@ export class AssetBuilder extends React.Component<AssetBuilderProps, AssetBuilde
             this.dropdowns[fieldName] = (ev, props) => {
                 let stateTransaction: any = {};
                 stateTransaction[fieldName] = props.value;
-                this.setState(stateTransaction);
+                this.setState(stateTransaction, this.props.onChange);
             };
         }
         return this.dropdowns[fieldName];
@@ -249,4 +276,33 @@ function mkGradient(colors: string[]) {
         colorStrings.push(`${color} ${i * 6.25}%, ${color} ${(i + 1) * 6.25}%`);
     }
     return `linear-gradient(to right, ${colorStrings.join(", ")})`;
+}
+
+interface CodePreviewProps {
+    text: string;
+}
+
+class CodePreview extends React.Component<CodePreviewProps> {
+    input: HTMLTextAreaElement;
+
+    handleTextRef = (i: HTMLTextAreaElement) => this.input = i;
+
+    handleCopy = () => {
+        if (!this.input) return;
+
+        this.input.focus();
+        this.input.setSelectionRange(0, 9999);
+
+        try {
+            const success = document.execCommand("copy");
+        } catch (e) {
+        }
+    };
+
+    render() {
+        return <Segment inverted className="code-preview">
+            <textarea className="code-content" ref={this.handleTextRef} contentEditable={false} value={this.props.text || ""}></textarea>
+            <Button className="code-copy" onClick={this.handleCopy}>Copy</Button>
+        </Segment>
+    }
 }
