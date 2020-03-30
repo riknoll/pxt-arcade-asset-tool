@@ -2,7 +2,7 @@
     "name": "pxt-editor-extension-sample",
     "version": "0.0.1",
     "description": "A MakeCode editor extension sample",
-    "homepage": "https://samelhusseini.github.io/pxt-editor-extension-sample/",
+    "homepage": "https://riknoll.github.io/pxt-arcade-asset-tool/",
     "scripts": {
         "build:dev": "./node_modules/.bin/webpack --mode development --config webpack.dev.js",
         "build:prod": "./node_modules/.bin/webpack --mode production --config webpack.prod.js",
